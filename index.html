@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Coffeebreak Spell Book</title>
+<meta name="description" content="Spells that change your life. A pink book of daily spells, for fun.">
+<meta name="theme-color" content="#e83e8c">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <section id="cover" class="cover" aria-label="Book cover">
+    <div class="cover-inner">
+      <div class="cover-border">
+        <p class="cover-top">Coffeebreak</p>
+        <img class="cover-logo" src="logo.png" alt="Coffeebreak logo">
+        <h1>Spell Book</h1>
+        <p class="cover-sub">Spells that change your life</p>
+        <button id="openBtn" class="btn gold" type="button">Open the book</button>
+      </div>
+    </div>
+    <div class="spine"></div>
+  </section>
+
+  <section id="book" class="book hidden" aria-label="Spell book">
+    <header class="topbar">
+      <button id="closeBtn" class="icon-btn" type="button" aria-label="Close the book">&#128213;</button>
+      <div class="title">Coffeebreak Spell Book</div>
+      <button id="favCount" class="icon-btn" type="button" aria-label="Favourites">&#9825; <span id="favN">0</span></button>
+    </header>
+    <div class="pagewrap">
+      <article id="page" class="page" aria-live="polite"></article>
+    </div>
+    <nav class="tabs" aria-label="Book sections">
+      <button data-tab="today" class="tab" type="button">Today</button>
+      <button data-tab="draw" class="tab" type="button">Draw</button>
+      <button data-tab="browse" class="tab" type="button">Browse</button>
+      <button data-tab="favs" class="tab" type="button">Favourites</button>
+      <button data-tab="remind" class="tab" type="button">Reminder</button>
+    </nav>
+    <p class="fun">For fun and inspiration only. Spells are not a promise of results and are not medical, legal or financial advice.</p>
+  </section>
+</main>
+<footer class="footer">&copy; Karen O'Brien (Coffeebreak). Karen O'Brien keeps all rights to this app, its design, name and logo. You may resell a physical phone you bought, but you may not copy this app or make your own version of it.</footer>
+<div id="toast" class="toast" role="status"></div>
+<script src="spells.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
