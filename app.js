@@ -7,7 +7,7 @@ var favs=LS.get('favs',[]);
 var page=document.getElementById('page');
 var toastEl=document.getElementById('toast');
 var state={tab:'today',cat:'All',spellId:null,ctx:null,from:'today'};
-var TABS=['today','draw','browse','favs','remind'];
+var TABS=['today','draw','browse','favs','relax','remind'];
 var order=0;
 
 function h(tag,attrs,kids){
@@ -184,10 +184,11 @@ function swap(node,dir){
   setTimeout(put,300);
 }
 function render(tab,dir){
+  if(window.CBRelax)window.CBRelax.stop();
   var prev=TABS.indexOf(state.tab);state.tab=tab;state.from=tab;
   var idx=TABS.indexOf(tab);
   var d=dir==='same'?'same':dir||(idx<prev?'back':'fwd');
-  var v={today:viewToday,draw:viewDraw,browse:viewBrowse,favs:viewFavs,remind:viewRemind}[tab]();
+  var v={today:viewToday,draw:viewDraw,browse:viewBrowse,favs:viewFavs,relax:function(){return window.CBRelax.view();},remind:viewRemind}[tab]();
   if(d==='same'){page.innerHTML='';page.appendChild(v);}else swap(v,d);
   setActiveTab(tab);
 }
@@ -215,11 +216,12 @@ function openBook(){
   if(reduce){go();return;}
   cover.classList.add('opening');setTimeout(go,650);
 }
-function closeBook(){book.classList.add('hidden');cover.classList.remove('hidden');page.innerHTML='';}
+function closeBook(){if(window.CBRelax)window.CBRelax.stop();book.classList.add('hidden');cover.classList.remove('hidden');page.innerHTML='';}
 document.getElementById('openBtn').addEventListener('click',openBook);
 document.getElementById('closeBtn').addEventListener('click',closeBook);
 document.getElementById('favCount').addEventListener('click',function(){render('favs');});
 document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){render(b.dataset.tab);});});
+if(window.CBRelax)window.CBRelax.init({h:h,toast:toast,LS:LS});
 updateFavN();
 window.__cb={spells:S,todayIndex:todayIndex};
 })();
